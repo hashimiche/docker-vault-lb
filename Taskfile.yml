@@ -1,0 +1,66 @@
+# https://taskfile.dev
+version: '3'
+
+dotenv:
+  - .env
+
+vars:
+  CONTAINER_RUNTIME: docker
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  all:
+    cmds:
+      - task: up
+      - task: init
+      - task: unseal
+
+  runtime:
+    cmds:
+      - |
+        echo "Using container runtime: {{ .CONTAINER_RUNTIME }}"
+
+  up:
+    preconditions:
+      - test -f .env
+      - test -f docker-compose.yml
+    cmds:
+      - |
+        {{ .CONTAINER_RUNTIME }} compose up -d --pull=missing
+        sleep 5
+    silent: true
+
+  restart:
+    cmds:
+      - |
+        {{ .CONTAINER_RUNTIME }} compose restart vault
+
+  status:
+    cmds:
+      - vault status
+
+  init:
+    cmds:
+      - ./scripts/10_vault_init.sh
+
+  unseal:
+    cmds:
+      - |
+        ./scripts/20_vault_unseal.sh
+        sleep 5
+        echo "Vault node direct access : http://localhost:8200 (should redirect to 'Vault is sealed page')"
+        echo "Vault LB access : http://vault.local:1080 (should redirect to Vault login page)"
+
+  down:
+    aliases: ["clean"]
+    cmds:
+      - |
+        {{ .CONTAINER_RUNTIME }} compose down -v
+    ignore_error: true
+    vars:
+      STACK_NAME:
+        sh: basename "`pwd`"
+
