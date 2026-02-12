@@ -62,7 +62,7 @@ docker compose version
 
 **Clone Repository:**
 ```bash
-git clone https://github.com/nhsy-hcp/docker-vault-stack.git
+git clone https://github.com/hashimiche/docker-vault-lb.git
 cd docker-vault-lb
 ```
 
@@ -75,7 +75,7 @@ Configure `.env` :
 
 ## Taskfile
 
-While `task all` is convenient, it only works the ini run, you can find the description of the others commands below.
+While `task all` is convenient, it only works during the first run, you can find the description of the others commands below.
 
 ```bash
 # 1. Start the complete stack
