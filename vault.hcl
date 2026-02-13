@@ -16,7 +16,7 @@ listener "tcp" {
   tls_disable   = true
   custom_response_headers {
     "default" = {
-      "Content-Security-Policy" = ["connect-src http://vault.local:1080"]
+      "Content-Security-Policy" = ["connect-src http://vault.localhost:1080"]
     }
   }
 }

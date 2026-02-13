@@ -52,7 +52,7 @@ tasks:
         ./scripts/20_vault_unseal.sh
         sleep 5
         echo "Vault node direct access : http://localhost:8200 (should redirect to 'Vault is sealed page')"
-        echo "Vault LB access : http://vault.local:1080 (should redirect to Vault login page)"
+        echo "Vault LB access : http://vault.localhost:1080 (should redirect to Vault login page)"
 
   down:
     aliases: ["clean"]

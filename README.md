@@ -36,16 +36,6 @@ Direct access to a node's UI may redirect to the 'Vault is sealed' page, whereas
 
 ## Prerequisites
 
-**Edit your hostfile**
-```bash
-# Use your favorite editor
-sudo vi /etc/hosts 
-
-# Edit the localhost line to look like this
-127.0.0.1	localhost vault.local
-
-```
-
 **Required Tools:**
 ```bash
 # Install task runner and jq
